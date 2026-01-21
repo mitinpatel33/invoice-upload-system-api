@@ -36,3 +36,13 @@ This project is a full-stack application that allows users to upload CSV/Excel f
 cd server
 npm install
 node src/server.js
+
+
+### Backend will run on:
+http://localhost:4000
+
+### Swagger API Docs:
+http://localhost:4000/api-docs
+
+### Frontend will run on:
+http://localhost:5173
