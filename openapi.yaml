@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Invoice Upload API
+  version: 1.0.0
+  description: API for uploading and validating CSV/Excel invoice files.
+servers:
+  - url: http://localhost:4000
+paths:
+  /api/invoices/upload:
+    post:
+      summary: Upload invoice file
+      description: Upload CSV or Excel file containing invoices
+      tags:
+        - Invoices
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: File processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        "Invoice Number":
+                          type: string
+                        Date:
+                          type: string
+                        "Customer Name":
+                          type: string
+                        Total:
+                          type: number
+                        Items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              description:
+                                type: string
+                              quantity:
+                                type: number
+                              price:
+                                type: number
+                              total:
+                                type: number
+                        Errors:
+                          type: string
+        '400':
+          description: File missing or invalid
+        '500':
+          description: Internal server error
